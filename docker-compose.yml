@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  genai-extractor:
+    container_name: genai-extractor
+    build: .
+    ports:
+      - '3009:3009'
+    depends_on:
+      - mongo
+    deploy:
+          resources:
+            limits:
+              cpus: "2.0"
+              memory: 2G
+    networks:
+      - shared-network
+    environment:
+      - MONGO_URI=mongodb+srv://saddamshah:hOzlWf1NF6Xnx7aA@agsiri.nk7ua3s.mongodb.net/listingService
+      - JWT_SECRET=agsiri2023
+
+  mongo:
+    image: mongo:4.4
+    container_name: genai-mongo
+    ports:
+      - '27020:27017'  # Host port 27020 mapped to container port 27017
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - shared-network
+
+volumes:
+  mongo-data:
+
+networks:
+  shared-network:
+    external: true

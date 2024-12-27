@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "b7ecc900-cd70-400e-98de-4e7debf9de8c",
+		"name": "content-extractor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9775427"
+	},
+	"item": [
+		{
+			"name": "sitemaps",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pipeline_request_id\": \"pipeline_request_instance.pk\",\n    \"data\": {\n        \"site_url\": \"https://www.dchfreeholdtoyota.com\",\n        \"depth\": 2,\n        \"exclude\": [\n            \"https://www.dchfreeholdtoyota.com/blog/*\"\n        ],\n        \"include\": [],\n        \"apply_robot_txt\": true, // optional, default is apply_robot_txt=true\n        \"follow_meta_directives\": true, // optional, default is true,\n        //  \"http_proxy\": \"http://groups-RESIDENTIAL,country-US:apify_proxy_L03fJ7ilHVgWIw2aNpiNkDlwzIXd8c45mF5z@proxy.apify.com:8000\", // This to use http:procy\n        \"use_sitemap\": false // If you want to generate sitemap using depth make this true\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/sitemaps",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"sitemaps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "extractContent",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"batch_request_id\": \"batch_request_id1\",\n    \"pipeline_request_id\": \"pipeline_request_id\",\n    \"urls\": [\n        \"https://www.grow.com\",\n        \"https://www.grow.com/product/features\"\n    ],\n    \"css_selectors\": [],\n    \"extraction_advance_model\": true, // Right now it is disabled from the code as Ingestor part is needs to be complete\n    //  \"http_proxy\": \"http://groups-RESIDENTIAL,country-US:apify_proxy_L03fJ7ilHVgWIw2aNpiNkDlwzIXd8c45mF5z@proxy.apify.com:8000\", // This to use http:procy\n    \"categorizations\": [\n        {\n            \"category\": \"New Vehicles\",\n            \"lead_capture\": true\n        },\n        {\n            \"category\": \"Used Vehicles\",\n            \"lead_capture\": true\n        },\n        {\n            \"category\": \"Service\",\n            \"lead_capture\": false\n        },\n        {\n            \"category\": \"Dealership\",\n            \"lead_capture\": false\n        },\n        {\n            \"category\": \"Parts\",\n            \"lead_capture\": false\n        },\n        {\n            \"category\": \"Other\",\n            \"lead_capture\": false\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/extractors/content",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"extractors",
+						"content"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "extractorsinventory",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"urls\": \"https://www.beckmastennorth.com/new-vehicles/?_p=1&_dFR%5Btype%5D%5B0%5D=New\",\n    \"paginationCount\": 1,\n    \"login\": false,\n    \"isSave\": false,\n    \"client_id\": \"500\",\n    \"credentials\": {\n        \"email\": \"abg@mail.com\",\n        \"password\": \"blahblah\"\n    },\n    \"depth\": 0,\n    \"notify\": \"Webhook endpoint URL\",\n    \"exclusions\": [],\n    \"inclusions\": [],\n    \"css_selectors\": [],\n    \"categorizations\": [\n        {\n            \"category\": \"New Vehicles\",\n            \"lead_capture\": true\n        },\n        {\n            \"category\": \"Used Vehicles\",\n            \"lead_capture\": true\n        },\n        {\n            \"category\": \"Service\",\n            \"lead_capture\": false\n        },\n        {\n            \"category\": \"Dealership\",\n            \"lead_capture\": false\n        },\n        {\n            \"category\": \"Parts\",\n            \"lead_capture\": false\n        },\n        {\n            \"category\": \"Other\",\n            \"lead_capture\": false\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/extractors/inventory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"extractors",
+						"inventory"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
