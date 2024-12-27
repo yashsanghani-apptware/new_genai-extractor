@@ -11,6 +11,7 @@ git checkout dev
 Pull the latest changes from the "dev" branch to ensure you have the most up-to-date code:
 * git pull origin dev
 
+
 # 4 Install Dependencies:
 Run the following command to install the necessary dependencies:
 * npm install
